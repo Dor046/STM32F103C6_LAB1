@@ -111,7 +111,7 @@ int main(void)
 
 	  	 default:
 	  		      state = 0;
-	  		      break;
+	  		      break;"
 	  	  }
 	  	  HAL_Delay(2000);
     /* USER CODE END WHILE */

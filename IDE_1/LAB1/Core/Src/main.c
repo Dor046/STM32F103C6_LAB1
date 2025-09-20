@@ -101,39 +101,62 @@ int main(void)
 
   	  switch(state)
   	  {
-  	  case 0: //RED
-  		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 0);
-  		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
-  		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
-  		  red --;
+  	 case 0: //RED ON; Gr ON
+  		 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 0);
+  		 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
+	     HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
+	     HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
+	     HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
+	     HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 0);
+		 green --;
 
-  		  if (red <=0 ){
-  			  red = 5;
+
+  		  if (green <=0 ){
+  			  green = 3;
   			  state = 1;
   		  }
   		  break;
 
-  	  case 1: //GREEN
-  		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
-  		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
-  		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
-  		  green--;
+  	  case 1: //GREENcase 1: //RED ON; Ye ON
+		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 0);
+		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
+		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
+		  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
+		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 0);
+		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
+  		  yellow--;
 
-  		 if (green <=0){
-  			 green = 3;
+  		 if (yellow <=0){
+  			 yellow = 2;
   			 state = 2;
   		 }
 
   		  break;
-  	  case 2: //YELLOW
+  	case 2: //GREEN ON; Re ON
+  		 HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 1);
+  		 HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 0);
+  		 HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 0);
+  	     HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
+  		 HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
+  		 green--;
+
+  		  if (green <= 0){
+  			  green = 2;
+  			  state = 3;
+  		  }
+  		  break;
+  	case 3: //YELLOW ON; Re On
   		  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, 1);
   		  HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, 0);
   		  HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, 1);
-  		  yellow--;
+  		  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 0);
+  		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
+  		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
 
-  		  if (yellow <= 0){
+  		  if (yellow <=0){
   			  yellow = 2;
-  			  state = 0;
+  			  state = 2;
   		  }
   		  break;
   	  }
@@ -194,13 +217,17 @@ static void MX_GPIO_Init(void)
   /* USER CODE END MX_GPIO_Init_1 */
 
   /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin|Red_Pin
+                          |Ye_Pin|Gr_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin LED_GREEN_Pin */
-  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin;
+  /*Configure GPIO pins : LED_RED_Pin LED_YELLOW_Pin LED_GREEN_Pin Red_Pin
+                           Ye_Pin Gr_Pin */
+  GPIO_InitStruct.Pin = LED_RED_Pin|LED_YELLOW_Pin|LED_GREEN_Pin|Red_Pin
+                          |Ye_Pin|Gr_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

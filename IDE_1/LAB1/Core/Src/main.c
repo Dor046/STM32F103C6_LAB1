@@ -54,30 +54,21 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint16_t led[12] = {
+    GPIO_PIN_1, GPIO_PIN_2, GPIO_PIN_3, GPIO_PIN_4,
+    GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7, GPIO_PIN_8,
+    GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11, GPIO_PIN_12
+};
+
 void clearAllClock(void) {
-    HAL_GPIO_WritePin(GPIOA,
-        GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7|
-        GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11|
-        GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15,
-        GPIO_PIN_SET);  // SET = tắt LED
+    for (int i = 0; i < 12; i++) {
+        HAL_GPIO_WritePin(GPIOA, led[i], GPIO_PIN_SET); // SET = 1 = tắt LED
+    }
 }
 
-void setNumberOnClock(int num) {
-    switch(num) {
-        case 0:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET); break;
-        case 1:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET); break;
-        case 2:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET); break;
-        case 3:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); break;
-        case 4:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); break;
-        case 5:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); break;
-        case 6:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET); break;
-        case 7:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET); break;
-        case 8:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET); break;
-        case 9:  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, GPIO_PIN_RESET); break;
-        case 10: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, GPIO_PIN_RESET); break;
-        case 11: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET); break;
-        default: break;
-    }
+void setNumberOnClock(int time) {
+    clearAllClock(); // tắt hết trước
+    HAL_GPIO_WritePin(GPIOA, led[time], GPIO_PIN_RESET); // RESET = 0 = bật LED
 }
 /* USER CODE END 0 */
 

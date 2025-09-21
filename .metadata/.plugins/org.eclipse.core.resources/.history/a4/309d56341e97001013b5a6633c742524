@@ -116,6 +116,7 @@ int main(void)
            default: break;
        }
    }
+  int counter = 0;
   int red = 5;
   int green = 3;
   int yellow = 2;
@@ -133,7 +134,7 @@ int main(void)
 		     HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 0);
 
 			 --green;
-			 display7SEG(green+2);
+			 display7SEG(green);
 	  		  if (green <=0 ){
 	  			  green = 3;
 	  			  state = 1;
@@ -147,7 +148,7 @@ int main(void)
 			  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
 			  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 0);
 			  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
-			  yellow--;
+			  --yellow;
 			  display7SEG(yellow);
 
 	  		 if (yellow <=0){
@@ -167,7 +168,7 @@ int main(void)
 	  		 --green;
 	  		display7SEG(green);
 	  		  if (green <= 0){
-	  			  green = 3;
+	  			  green = 2;
 	  			  state = 3;
 	  		  }
 	  		  break;

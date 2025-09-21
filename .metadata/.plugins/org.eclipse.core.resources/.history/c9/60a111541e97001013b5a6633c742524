@@ -147,8 +147,8 @@ int main(void)
 			  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
 			  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 0);
 			  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
-			  yellow--;
-			  display7SEG(yellow);
+			  --yellow;
+			  display7SEG(yellow + 2);
 
 	  		 if (yellow <=0){
 	  			 yellow = 2;

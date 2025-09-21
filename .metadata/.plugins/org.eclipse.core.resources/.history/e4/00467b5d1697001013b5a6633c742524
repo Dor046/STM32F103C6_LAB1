@@ -92,30 +92,6 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  void display7SEG(int num) {
-       // Tắt tất cả trước
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET); // a
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET); // b
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET); // c
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, GPIO_PIN_SET); // d
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, GPIO_PIN_SET); // e
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET); // f
-       HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, GPIO_PIN_SET); // g
-
-       switch(num) {
-           case 0: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5, GPIO_PIN_RESET); break;
-           case 1: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1|GPIO_PIN_2, GPIO_PIN_RESET); break;
-           case 2: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 3: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 4: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 5: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 6: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 7: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2, GPIO_PIN_RESET); break;
-           case 8: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           case 9: HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET); break;
-           default: break;
-       }
-   }
   int red = 5;
   int green = 3;
   int yellow = 2;
@@ -131,9 +107,9 @@ int main(void)
 		     HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
 		     HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 		     HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 0);
+			 green --;
 
-			 --green;
-			 display7SEG(green+2);
+
 	  		  if (green <=0 ){
 	  			  green = 3;
 	  			  state = 1;
@@ -147,8 +123,7 @@ int main(void)
 			  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 1);
 			  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 0);
 			  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
-			  yellow--;
-			  display7SEG(yellow);
+	  		  yellow--;
 
 	  		 if (yellow <=0){
 	  			 yellow = 2;
@@ -163,11 +138,10 @@ int main(void)
 	  		 HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 0);
 	  	     HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 	  		 HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
+	  		 green--;
 
-	  		 --green;
-	  		display7SEG(green);
 	  		  if (green <= 0){
-	  			  green = 3;
+	  			  green = 2;
 	  			  state = 3;
 	  		  }
 	  		  break;
@@ -178,9 +152,7 @@ int main(void)
 	  		  HAL_GPIO_WritePin(Red_GPIO_Port, Red_Pin, 0);
 	  		  HAL_GPIO_WritePin(Ye_GPIO_Port, Ye_Pin, 1);
 	  		  HAL_GPIO_WritePin(Gr_GPIO_Port, Gr_Pin, 1);
-	  		  --yellow;
-	  		  display7SEG(yellow);
-
+	  		  yellow --;
 	  		  if (yellow <=0){
 	  			  yellow = 2;
 	  			  state = 0;

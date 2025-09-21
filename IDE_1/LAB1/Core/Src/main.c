@@ -67,7 +67,6 @@ void clearAllClock(void) {
 }
 
 void setNumberOnClock(int time) {
-    clearAllClock(); // tắt hết trước
     HAL_GPIO_WritePin(GPIOA, led[time], GPIO_PIN_RESET); // RESET = 0 = bật LED
 }
 

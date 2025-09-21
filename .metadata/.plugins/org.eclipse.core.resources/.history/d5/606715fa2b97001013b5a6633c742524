@@ -73,7 +73,6 @@ void setNumberOnClock(int time) {
 
 void clearNumberOnClock(int num){
     HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_SET);
-}
 /* USER CODE END 0 */
 
 /**

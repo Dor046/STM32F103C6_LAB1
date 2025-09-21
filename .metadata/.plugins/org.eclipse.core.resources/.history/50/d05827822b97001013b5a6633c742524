@@ -65,15 +65,6 @@ void clearAllClock(void) {
         HAL_GPIO_WritePin(GPIOA, led[i], GPIO_PIN_SET); // SET = 1 = tắt LED
     }
 }
-
-void setNumberOnClock(int time) {
-    clearAllClock(); // tắt hết trước
-    HAL_GPIO_WritePin(GPIOA, led[time], GPIO_PIN_RESET); // RESET = 0 = bật LED
-}
-
-void clearNumberOnClock(int num){
-    HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_SET);
-}
 /* USER CODE END 0 */
 
 /**

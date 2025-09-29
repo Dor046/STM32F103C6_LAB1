@@ -103,8 +103,37 @@ int currentDigit = 0;
 	  if(timer1_flag == 1){
 	 		  setTimer1(50);
 	 		  //TODO
+	 		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_SET);
+	 		  switch(currentDigit){
+	 		  case 0:
+	 			 display7SEG(1);                       // LED1 hiển thị số 1
+	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_4, GPIO_PIN_RESET); // bật EN1
+ 	 		     currentDigit = 1;
+ 	 		     break;
+
+	 		  case 1:
+	 			 display7SEG(2);                       // LED2 hiển thị số 2
+	 			   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7|GPIO_PIN_4, GPIO_PIN_RESET); // bật EN2
+	 			   currentDigit = 2;
+
+	 			   break;
+
+	 		  case 2:
+	 			 display7SEG(3);                       // LED2 hiển thị số 2
+	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); // bật EN2
+	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	 			 currentDigit = 3;
+	 			 break;
+
+	 		  case 3:
+	 			 display7SEG(0);                       // LED2 hiển thị số 2
+	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // bật EN2
+	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+	 		   	 currentDigit = 0;
+	 			 break;
+	 		  }
 	 		 // tắt 2 EN trước
-	 			        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_SET);
+	 			        /*HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_SET);
 	 			        if (currentDigit == 0) {
 	 			            display7SEG(1);                       // LED1 hiển thị số 1
 	 			            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET); // bật EN1
@@ -113,7 +142,7 @@ int currentDigit = 0;
 	 			            display7SEG(2);                       // LED2 hiển thị số 2
 	 			            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); // bật EN2
 	 			            currentDigit = 0;
-	 			        }
+	 			        }*/
 	 		  HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
 
 	  }
@@ -223,14 +252,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, RED_Pin|GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|RED_Pin|GPIO_PIN_6|GPIO_PIN_7
+                          |GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3
                           |GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : RED_Pin PA6 PA7 */
-  GPIO_InitStruct.Pin = RED_Pin|GPIO_PIN_6|GPIO_PIN_7;
+  /*Configure GPIO pins : PA4 RED_Pin PA6 PA7
+                           PA8 PA9 */
+  GPIO_InitStruct.Pin = GPIO_PIN_4|RED_Pin|GPIO_PIN_6|GPIO_PIN_7
+                          |GPIO_PIN_8|GPIO_PIN_9;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

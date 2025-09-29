@@ -119,8 +119,8 @@ HAL_TIM_Base_Start_IT(&htim2);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-setTimer1(100);
- 8000168:	2064      	movs	r0, #100	@ 0x64
+setTimer1(50);
+ 8000168:	2032      	movs	r0, #50	@ 0x32
  800016a:	f000 f927 	bl	80003bc <setTimer1>
 int currentDigit = 0;
  800016e:	2300      	movs	r3, #0
@@ -132,8 +132,8 @@ int currentDigit = 0;
  8000174:	681b      	ldr	r3, [r3, #0]
  8000176:	2b01      	cmp	r3, #1
  8000178:	d1fb      	bne.n	8000172 <main+0x26>
-	 		  setTimer1(100);
- 800017a:	2064      	movs	r0, #100	@ 0x64
+	 		  setTimer1(50);
+ 800017a:	2032      	movs	r0, #50	@ 0x32
  800017c:	f000 f91e 	bl	80003bc <setTimer1>
 	 		  //TODO
 	 		 // tắt 2 EN trước

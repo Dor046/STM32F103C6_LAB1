@@ -96,12 +96,12 @@ HAL_TIM_Base_Start_IT(&htim2);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-setTimer1(100);
+setTimer1(50);
 int currentDigit = 0;
   while (1)
   {
 	  if(timer1_flag == 1){
-	 		  setTimer1(100);
+	 		  setTimer1(50);
 	 		  //TODO
 	 		 // tắt 2 EN trước
 	 			        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_SET);

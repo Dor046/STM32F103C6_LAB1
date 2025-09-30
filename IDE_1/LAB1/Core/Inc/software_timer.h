@@ -14,10 +14,14 @@ extern int currentDigit;
 extern const int MAX_LED;
 extern int index_led;
 extern int led_buffer[4];
+extern int hour;
+extern int minute;
+extern int second;
 
 void setTimer1(int duration);
 void setTimer2(int duration);
 void timerRun();
 void display7SEG (int num);
 void update7SEG(int index);
+void updateClockBuffer();
 #endif /* INC_SOFTWARE_TIMER_H_ */

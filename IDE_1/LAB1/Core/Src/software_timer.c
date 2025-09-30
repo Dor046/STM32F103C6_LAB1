@@ -13,6 +13,12 @@ int timer1_flag = 0;
 int timer2_counter = 0;
 int timer2_flag = 0;
 
+int currentDigit = 0;
+
+const int MAX_LED = 4;
+int index_led = 0;
+int led_buffer[4] = {1, 2, 3, 4}; // có thể đổi giá trị để test
+
 void setTimer1(int duration){
 	timer1_counter = duration;
 	timer1_flag = 0;
@@ -66,3 +72,32 @@ void display7SEG(int num)
 	        default: break;
 	    }
 	}
+
+void update7SEG(int index) {
+    // Tắt hết các EN trước
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_SET);
+    switch (index) {
+    case 0:
+        display7SEG(led_buffer[0]);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET); // bật EN1
+        break;
+
+    case 1:
+        display7SEG(led_buffer[1]);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); // bật EN2
+        break;
+
+    case 2:
+        display7SEG(led_buffer[2]);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); // bật EN3
+        break;
+
+    case 3:
+        display7SEG(led_buffer[3]);
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // bật EN4
+        break;
+
+    default:
+        break;
+    }
+}

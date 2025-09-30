@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  00016412  00000000  00000000  0000d5e3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000a080  00000000  00000000  000239f5  2**0
+ 17 .debug_line   0000a07e  00000000  00000000  000239f5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00081f2a  00000000  00000000  0002da75  2**0
+ 18 .debug_str    00081f2a  00000000  00000000  0002da73  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  000af99f  2**0
+ 19 .comment      00000043  00000000  00000000  000af99d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000268c  00000000  00000000  000af9e4  2**2
+ 20 .debug_frame  0000268c  00000000  00000000  000af9e0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000004d  00000000  00000000  000b2070  2**0
+ 21 .debug_line_str 0000004d  00000000  00000000  000b206c  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -118,8 +118,8 @@ HAL_TIM_Base_Start_IT(&htim2);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-setTimer1(50);
- 8000166:	2032      	movs	r0, #50	@ 0x32
+setTimer1(100);
+ 8000166:	2064      	movs	r0, #100	@ 0x64
  8000168:	f000 f934 	bl	80003d4 <setTimer1>
 setTimer2(100);
  800016c:	2064      	movs	r0, #100	@ 0x64
@@ -471,8 +471,8 @@ if(timer1_flag ==1){
  800035a:	681b      	ldr	r3, [r3, #0]
  800035c:	2b01      	cmp	r3, #1
  800035e:	d115      	bne.n	800038c <HAL_TIM_PeriodElapsedCallback+0x40>
-	setTimer1(50);
- 8000360:	2032      	movs	r0, #50	@ 0x32
+	setTimer1(100);
+ 8000360:	2064      	movs	r0, #100	@ 0x64
  8000362:	f000 f837 	bl	80003d4 <setTimer1>
     update7SEG(index_led);
  8000366:	4b14      	ldr	r3, [pc, #80]	@ (80003b8 <HAL_TIM_PeriodElapsedCallback+0x6c>)
@@ -505,15 +505,15 @@ if (timer2_flag == 1){
 	setTimer2(100);
  8000394:	2064      	movs	r0, #100	@ 0x64
  8000396:	f000 f831 	bl	80003fc <setTimer2>
-			HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
+	HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
  800039a:	2120      	movs	r1, #32
  800039c:	4809      	ldr	r0, [pc, #36]	@ (80003c4 <HAL_TIM_PeriodElapsedCallback+0x78>)
  800039e:	f000 fce3 	bl	8000d68 <HAL_GPIO_TogglePin>
-			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+	HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
  80003a2:	2110      	movs	r1, #16
  80003a4:	4807      	ldr	r0, [pc, #28]	@ (80003c4 <HAL_TIM_PeriodElapsedCallback+0x78>)
  80003a6:	f000 fcdf 	bl	8000d68 <HAL_GPIO_TogglePin>
-		}
+	}
 }
  80003aa:	bf00      	nop
  80003ac:	3708      	adds	r7, #8

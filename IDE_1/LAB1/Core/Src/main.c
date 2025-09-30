@@ -97,55 +97,11 @@ HAL_TIM_Base_Start_IT(&htim2);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 setTimer1(50);
-int currentDigit = 0;
+setTimer2(100);
   while (1)
   {
-	  if(timer1_flag == 1){
-	 		  setTimer1(50);
-	 		  //TODO
-	 		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_SET);
-	 		  switch(currentDigit){
-	 		  case 0:
-	 			 display7SEG(1);                       // LED1 hiển thị số 1
-	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_4, GPIO_PIN_RESET); // bật EN1
- 	 		     currentDigit = 1;
- 	 		     break;
 
-	 		  case 1:
-	 			 display7SEG(2);                       // LED2 hiển thị số 2
-	 			   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7|GPIO_PIN_4, GPIO_PIN_RESET); // bật EN2
-	 			   currentDigit = 2;
 
-	 			   break;
-
-	 		  case 2:
-	 			 display7SEG(3);                       // LED2 hiển thị số 2
-	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); // bật EN2
-	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	 			 currentDigit = 3;
-	 			 break;
-
-	 		  case 3:
-	 			 display7SEG(0);                       // LED2 hiển thị số 2
-	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // bật EN2
-	 			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
-	 		   	 currentDigit = 0;
-	 			 break;
-	 		  }
-	 		 // tắt 2 EN trước
-	 			        /*HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7, GPIO_PIN_SET);
-	 			        if (currentDigit == 0) {
-	 			            display7SEG(1);                       // LED1 hiển thị số 1
-	 			            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET); // bật EN1
-	 			            currentDigit = 1;
-	 			        } else {
-	 			            display7SEG(2);                       // LED2 hiển thị số 2
-	 			            HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); // bật EN2
-	 			            currentDigit = 0;
-	 			        }*/
-	 		  HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
-
-	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -283,10 +239,50 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+int currentDigit = 0;
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	timerRun();
+if(timer1_flag ==1){
+	setTimer1(50);
+			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6|GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9, GPIO_PIN_SET);
+		 switch(currentDigit){
+		case 0:
+		 display7SEG(1);                       // LED1 hiển thị số 1
+		 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_6, GPIO_PIN_RESET); // bật EN1
+		 currentDigit = 1;
+			 break;
 
+			 case 1:
+				 display7SEG(2);                       // LED2 hiển thị số 2
+			   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, GPIO_PIN_RESET); // bật EN2
+				 currentDigit = 2;
+
+			   break;
+
+			  case 2:
+				 display7SEG(3);                       // LED2 hiển thị số 2
+			 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_8, GPIO_PIN_RESET); // bật EN2
+
+			 currentDigit = 3;
+					 break;
+
+		  case 3:
+		 display7SEG(0);                       // LED2 hiển thị số 2
+	 HAL_GPIO_WritePin(GPIOA, GPIO_PIN_9, GPIO_PIN_RESET); // bật EN2
+
+			 currentDigit = 0;
+		break;
+		  }
 }
+if (timer2_flag == 1){
+	setTimer2(100);
+			HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
+			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+
+		}
+}
+
 /* USER CODE END 4 */
 
 /**

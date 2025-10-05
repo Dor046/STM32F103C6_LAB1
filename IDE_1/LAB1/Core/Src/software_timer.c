@@ -101,7 +101,7 @@ void update7SEG(int index) {
         break;
     }
 }
-//=====================================================
+//ex5=====================================================
 int hour = 15, minute = 8, second = 50;
 void updateClockBuffer(){
 	 // Hiển thị giờ: 2 chữ số
@@ -112,3 +112,6 @@ void updateClockBuffer(){
 	    led_buffer[2] = minute / 10; // hàng chục phút
 	    led_buffer[3] = minute % 10; // hàng đơn vị phút
 }
+
+
+

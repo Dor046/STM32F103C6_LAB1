@@ -56,13 +56,30 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+// ================= Exercise 6: Software Timer =================
+int timer0_counter = 0;
+int timer0_flag = 0;
+int TIMER_CYCLE = 10;   // 10ms vì timer interrupt là 10ms
 
+void setTimer0(int duration) {
+    timer0_counter = duration / TIMER_CYCLE;
+    timer0_flag = 0;
+}
+
+void timer_run_0() {
+    if (timer0_counter > 0) {
+        timer0_counter--;
+        if (timer0_counter == 0)
+            timer0_flag = 1;
+    }
+}
 /* USER CODE END 0 */
 
 /**
   * @brief  The application entry point.
   * @retval int
   */
+
 int main(void)
 {
 
@@ -98,8 +115,10 @@ HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE BEGIN WHILE */
 setTimer1(100);
 setTimer2(100);
+setTimer0(1000);
   while (1)
   {
+	  if (timer0_flag == 1) {
 	  second ++;
 	  if ( second >= 60) {
 	   second = 0;
@@ -113,8 +132,8 @@ setTimer2(100);
 	  hour = 0;
 	  }
 	  updateClockBuffer () ;
-	  HAL_Delay (1000) ;
-
+	  setTimer0(1000); // reset lại timer 1s
+	        }
 
     /* USER CODE END WHILE */
 
@@ -255,7 +274,8 @@ static void MX_GPIO_Init(void)
 /* USER CODE BEGIN 4 */
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
-	timerRun();
+	timerRun(); //timer1, timer2
+	 timer_run_0();
 if(timer1_flag ==1){
 	setTimer1(100);
     update7SEG(index_led);

@@ -24,4 +24,7 @@ void timerRun();
 void display7SEG (int num);
 void update7SEG(int index);
 void updateClockBuffer();
+
+
+
 #endif /* INC_SOFTWARE_TIMER_H_ */

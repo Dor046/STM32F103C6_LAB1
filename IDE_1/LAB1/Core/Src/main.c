@@ -113,13 +113,12 @@ HAL_TIM_Base_Start_IT(&htim2);
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-setTimer1(100);
-setTimer2(25);
+setTimer1(25);
+setTimer0(1000);
   while (1)
   {
-	  if (timer1_flag == 1)
+	  if (timer0_flag == 1)
 	  {
-		  setTimer1(100);
 	  second ++;
 	  if ( second >= 60) {
 	   second = 0;
@@ -133,16 +132,9 @@ setTimer2(25);
 	  hour = 0;
 	  }
 	  updateClockBuffer () ;
-	  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4); // Nhấp nháy DOT
-	  HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
-	      }
-
-  if (timer2_flag == 1)
-     {
-       setTimer2(25);
-       update7SEG(index_led);
-       index_led++;
-       if (index_led >= MAX_LED) index_led = 0;
+		HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
+		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
+ 	  setTimer0(1000); // reset lại timer 1s
      }
 
 
@@ -286,6 +278,14 @@ static void MX_GPIO_Init(void)
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	timerRun();
+	 timer_run_0();
+	if(timer1_flag ==1){
+		setTimer1(25);
+	    update7SEG(index_led);
+	    index_led++;
+	    if (index_led >= MAX_LED) index_led = 0; // quay lại 0
+			  }
+
 }
 
 /* USER CODE END 4 */

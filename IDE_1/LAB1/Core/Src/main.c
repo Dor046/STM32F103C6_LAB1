@@ -137,6 +137,13 @@ setTimer0(1000);
  	  setTimer0(1000); // reset lại timer 1s
      }
 
+		if(timer1_flag ==1){
+			setTimer1(25);
+		    update7SEG(index_led);
+		    index_led++;
+		    if (index_led >= MAX_LED) index_led = 0; // quay lại 0
+				  }
+
 
     /* USER CODE END WHILE */
 
@@ -279,12 +286,6 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	timerRun();
 	 timer_run_0();
-	if(timer1_flag ==1){
-		setTimer1(25);
-	    update7SEG(index_led);
-	    index_led++;
-	    if (index_led >= MAX_LED) index_led = 0; // quay lại 0
-			  }
 
 }
 

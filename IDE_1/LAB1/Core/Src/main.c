@@ -140,6 +140,15 @@ void updateLEDMatrix(int index){
 		break;
 	}
 }
+
+void shiftLeftMatrix(){
+	uint8_t first_col = matrix_buffer[0];
+	for (int i = 0; i < MAX_LED_MATRIX - 1; i++){
+		matrix_buffer[i]= matrix_buffer[i+1];
+	}
+	matrix_buffer[MAX_LED_MATRIX - 1] = first_col;
+
+}
 /* USER CODE END 0 */
 
 /**
@@ -202,6 +211,7 @@ setTimer0(1000);
 		HAL_GPIO_TogglePin(RED_GPIO_Port, RED_Pin);
 		HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_4);
  	  setTimer0(1000); // reset lại timer 1s
+ 	  shiftLeftMatrix();
      }
 
 		if(timer1_flag ==1){
@@ -212,12 +222,15 @@ setTimer0(1000);
 				  }
 
 		if (timer2_flag == 1) {
-		        setTimer2(3); // thời gian quét 10ms (100Hz)
+		        setTimer2(25); // thời gian quét 10ms (100Hz)
 		        updateLEDMatrix(index_led_matrix);
 		        index_led_matrix++;
 		        if (index_led_matrix >= 8)
 		            index_led_matrix = 0;
 		    }
+
+
+
 
 
     /* USER CODE END WHILE */

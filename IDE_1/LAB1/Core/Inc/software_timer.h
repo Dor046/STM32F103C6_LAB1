@@ -25,6 +25,8 @@ void display7SEG (int num);
 void update7SEG(int index);
 void updateClockBuffer();
 
-
-
+/*extern const int MAX_LED_MATRIX;
+extern int index_led_matrix;
+extern int matrix_buffer[8];
+void updateLEDMatrix(int index);*/
 #endif /* INC_SOFTWARE_TIMER_H_ */

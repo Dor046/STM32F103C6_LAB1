@@ -113,5 +113,44 @@ void updateClockBuffer(){
 	    led_buffer[3] = minute % 10; // hàng đơn vị phút
 }
 
+//ex9=====================================================
+// Định nghĩa LED ma trận
+/*const int MAX_LED_MATRIX = 8;
+int index_led_matrix = 0;
 
+// Dữ liệu hiển thị ký tự “A” trên LED Matrix
+// Mỗi byte tương ứng một cột (bit 1 = LED sáng)
+int matrix_buffer [8] = {
+		0x3C, 0x66, 0x66, 0x7E, 0x66, 0x66, 0x66, 0x00
+		  };
+// Hàm hiển thị từng cột
+void updateLEDMatrix(int index) {
+    // Tắt tất cả các cột
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2|
+                             GPIO_PIN_3|GPIO_PIN_10|GPIO_PIN_11|
+                             GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_SET);
 
+    // Xuất dữ liệu cho hàng (PB8 - PB15)
+    uint8_t data = matrix_buffer[index];
+    for (int i = 0; i < 8; i++) {
+        if (data & (1 << i)) {
+            HAL_GPIO_WritePin(GPIOB, (1 << (8 + i)), GPIO_PIN_SET);
+        } else {
+            HAL_GPIO_WritePin(GPIOB, (1 << (8 + i)), GPIO_PIN_RESET);
+        }
+    }
+
+    // Bật cột tương ứng (ENM0 → ENM7)
+    switch (index) {
+        case 0: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET); break;
+        case 1: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET); break;
+        case 2: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_10, GPIO_PIN_RESET); break;
+        case 3: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_RESET); break;
+        case 4: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_12, GPIO_PIN_RESET); break;
+        case 5: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_13, GPIO_PIN_RESET); break;
+        case 6: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_14, GPIO_PIN_RESET); break;
+        case 7: HAL_GPIO_WritePin(GPIOA, GPIO_PIN_15, GPIO_PIN_RESET); break;
+        default: break;
+    }
+}
+*/
